@@ -8,7 +8,7 @@ public class Main {
         int maxCrosses = 11;
 
         if (args.length < 3) {
-            initialState = new State(4, 3);
+            initialState = new State(3, 2);
         } else {
             initialState = new State(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
             maxCrosses = Integer.parseInt(args[2]);
