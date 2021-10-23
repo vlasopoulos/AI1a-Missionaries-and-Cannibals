@@ -87,14 +87,14 @@ public class State {
                 System.out.println("     --- Boat: RIGHT");
                 break;
         }
-        System.out.println("             ____________||____________");
+        System.out.println("             ------------||------------");
         System.out.print("Missionaries:");
         System.out.print("     " + missionariesLeft + "      " + "||" + "     " + missionariesRight);
         System.out.println();
         System.out.print("   Cannibals:");
         System.out.print("     " + cannibalsLeft + "      " + "||" + "     " + cannibalsRight);
         System.out.println();
-        System.out.println("             ____________||____________");
+        System.out.println("             ------------||------------");
     }
 
     @Override
