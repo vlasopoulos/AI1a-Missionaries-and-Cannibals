@@ -4,16 +4,18 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        State initialState;
+
+        int population = 3;
+        int boatCapacity = 2;
         int maxCrosses = 11;
 
-        if (args.length < 3) {
-            initialState = new State(3, 2);
-        } else {
-            initialState = new State(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+        if (args.length == 3) {
+            population = Integer.parseInt(args[0]);
+            boatCapacity = Integer.parseInt(args[1]);
             maxCrosses = Integer.parseInt(args[2]);
         }
 
+        State initialState = new State(population, boatCapacity);
         SpaceSearcher searcher = new SpaceSearcher(maxCrosses);
 
         long start = System.currentTimeMillis();
