@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class State {
+public class State implements Comparable<State> {
 
     private int population;
     private int boatCapacity;
@@ -11,8 +11,10 @@ public class State {
     private int cannibalsLeft;
     private int cannibalsRight;
     private position boatPosition;
-    private int crossNumber = 0;
+    private int crossNumber = 0; // also g(n)
     private State father = null;
+
+    private int score;
 
     State(int n, int m) { //n = arithmos missionaries/cannibals, m = xwritikotita varkas
         this.population = n;
@@ -33,6 +35,10 @@ public class State {
         this.boatCapacity = boatCapacity;
         this.boatPosition = boatPosition;
         this.crossNumber = crossNumber;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public int getCrossNumber() {
@@ -56,12 +62,14 @@ public class State {
                     if (boatPosition == position.LEFT) {
                         if ((missionariesLeft - missionariesOnBoat >= cannibalsLeft - cannibalsOnBoat || missionariesLeft - missionariesOnBoat == 0) && (missionariesRight + missionariesOnBoat >= cannibalsRight + cannibalsOnBoat || missionariesRight + missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft - missionariesOnBoat, missionariesRight + missionariesOnBoat, cannibalsLeft - cannibalsOnBoat, cannibalsRight + cannibalsOnBoat, boatCapacity, position.RIGHT, crossNumber + 1);
+                            child.heuristic();
                             child.setFather(this);
                             children.add(child);
                         }
                     } else { // boatPosition == position.RIGHT
                         if ((missionariesLeft + missionariesOnBoat >= cannibalsLeft + cannibalsOnBoat || missionariesLeft + missionariesOnBoat == 0) && (missionariesRight - missionariesOnBoat >= cannibalsRight - cannibalsOnBoat || missionariesRight - missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft + missionariesOnBoat, missionariesRight - missionariesOnBoat, cannibalsLeft + cannibalsOnBoat, cannibalsRight - cannibalsOnBoat, boatCapacity, position.LEFT, crossNumber + 1);
+                            child.heuristic();
                             child.setFather(this);
                             children.add(child);
                         }
@@ -97,6 +105,17 @@ public class State {
         System.out.println("             ------------||------------");
     }
 
+    void heuristic() {
+        if (boatPosition == position.RIGHT) this.score = boatCapacity * (missionariesLeft + cannibalsLeft);
+        else {
+            if (missionariesLeft + cannibalsLeft == 1) this.score = 1;
+            else {
+                if (boatCapacity * ((missionariesLeft + cannibalsLeft) - 1) > -1)
+                    this.score = boatCapacity * ((missionariesLeft + cannibalsLeft) - 1);
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,6 +127,11 @@ public class State {
     @Override
     public int hashCode() {
         return Objects.hash(missionariesLeft, missionariesRight, cannibalsLeft, cannibalsRight, boatPosition);
+    }
+
+    @Override
+    public int compareTo(State s) {
+        return Integer.compare(this.score + this.getCrossNumber(), s.score + s.getCrossNumber()); // add crossNumber for A*
     }
 
     enum position {LEFT, RIGHT}

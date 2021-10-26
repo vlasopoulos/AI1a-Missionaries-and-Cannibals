@@ -19,7 +19,7 @@ public class Main {
         SpaceSearcher searcher = new SpaceSearcher(maxCrosses);
 
         long start = System.currentTimeMillis();
-        State terminalState = searcher.BFSClosedSet(initialState);
+        State terminalState = searcher.AStarClosedSet(initialState);
         long end = System.currentTimeMillis();
 
         if (terminalState == null) {
