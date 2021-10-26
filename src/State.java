@@ -112,7 +112,7 @@ public class State implements Comparable<State> {
         }
         else { // boat LEFT
             if (missionariesLeft + cannibalsLeft <= boatCapacity) this.score = 1;
-            else this.score = (int) Math.ceil((double)(missionariesLeft + cannibalsLeft)/boatCapacity - 1) * 2 + 1;
+            else this.score = (int) Math.ceil((double)(missionariesLeft + cannibalsLeft)/boatCapacity) * 2 - 1;
         }
     }
 
