@@ -53,7 +53,7 @@ public class State implements Comparable<State> {
         this.father = father;
     }
 
-    ArrayList<State> getChildren() {
+    ArrayList<State> getChildren(boolean useHeuristic) {
         ArrayList<State> children = new ArrayList<>();
 
         for (int missionariesOnBoat = 0; missionariesOnBoat <= boatCapacity; missionariesOnBoat++) {
@@ -62,14 +62,14 @@ public class State implements Comparable<State> {
                     if (boatPosition == position.LEFT) {
                         if ((missionariesLeft - missionariesOnBoat >= cannibalsLeft - cannibalsOnBoat || missionariesLeft - missionariesOnBoat == 0) && (missionariesRight + missionariesOnBoat >= cannibalsRight + cannibalsOnBoat || missionariesRight + missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft - missionariesOnBoat, missionariesRight + missionariesOnBoat, cannibalsLeft - cannibalsOnBoat, cannibalsRight + cannibalsOnBoat, boatCapacity, position.RIGHT, crossNumber + 1);
-                            child.heuristic();
+                            if (useHeuristic) child.heuristic();
                             child.setFather(this);
                             children.add(child);
                         }
                     } else { // boatPosition == position.RIGHT
                         if ((missionariesLeft + missionariesOnBoat >= cannibalsLeft + cannibalsOnBoat || missionariesLeft + missionariesOnBoat == 0) && (missionariesRight - missionariesOnBoat >= cannibalsRight - cannibalsOnBoat || missionariesRight - missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft + missionariesOnBoat, missionariesRight - missionariesOnBoat, cannibalsLeft + cannibalsOnBoat, cannibalsRight - cannibalsOnBoat, boatCapacity, position.LEFT, crossNumber + 1);
-                            child.heuristic();
+                            if (useHeuristic) child.heuristic();
                             child.setFather(this);
                             children.add(child);
                         }
