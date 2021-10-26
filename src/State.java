@@ -105,6 +105,7 @@ public class State implements Comparable<State> {
         System.out.println("             ------------||------------");
     }
 
+    //estw oti i varka mporei na perasei adeia, to score einai posa cross prepei na kanei i varka.
     void heuristic() {
         if (boatPosition == position.RIGHT) {
             if (missionariesLeft + cannibalsLeft == 0) this.score = 0;
