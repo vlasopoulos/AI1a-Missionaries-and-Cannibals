@@ -89,10 +89,10 @@ public class State implements Comparable<State> {
         System.out.print("                 Left    ||    Right");
         switch (boatPosition) {
             case LEFT:
-                System.out.println("     --- Boat: LEFT");
+                System.out.println("     --- Boat: LEFT | h(n) = " + getScore());
                 break;
             case RIGHT:
-                System.out.println("     --- Boat: RIGHT");
+                System.out.println("     --- Boat: RIGHT | h(n) = " + getScore());
                 break;
         }
         System.out.println("             ------------||------------");
@@ -106,13 +106,13 @@ public class State implements Comparable<State> {
     }
 
     void heuristic() {
-        if (boatPosition == position.RIGHT) this.score = boatCapacity * (missionariesLeft + cannibalsLeft);
-        else {
-            if (missionariesLeft + cannibalsLeft == 1) this.score = 1;
-            else {
-                if (boatCapacity * ((missionariesLeft + cannibalsLeft) - 1) > -1)
-                    this.score = boatCapacity * ((missionariesLeft + cannibalsLeft) - 1);
-            }
+        if (boatPosition == position.RIGHT) {
+            if (missionariesLeft + cannibalsLeft == 0) this.score = 0;
+            else this.score = (int) Math.ceil((double)(missionariesLeft + cannibalsLeft)/boatCapacity) * 2;
+        }
+        else { // boat LEFT
+            if (missionariesLeft + cannibalsLeft <= boatCapacity) this.score = 1;
+            else this.score = (int) Math.ceil((double)(missionariesLeft + cannibalsLeft)/boatCapacity - 1) * 2 + 1;
         }
     }
 
