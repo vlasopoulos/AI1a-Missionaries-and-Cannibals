@@ -66,7 +66,7 @@ public class State implements Comparable<State> {
                             child.setFather(this);
                             children.add(child);
                         }
-                    } else if (boatPosition == position.RIGHT && missionariesRight-missionariesOnBoat>-1 && cannibalsRight-cannibalsOnBoat>-1){
+                    } else if (boatPosition == position.RIGHT && missionariesRight-missionariesOnBoat>-1 && cannibalsRight-cannibalsOnBoat>-1 ){ // boatPosition == position.RIGHT
                         if ((missionariesLeft + missionariesOnBoat >= cannibalsLeft + cannibalsOnBoat || missionariesLeft + missionariesOnBoat == 0) && (missionariesRight - missionariesOnBoat >= cannibalsRight - cannibalsOnBoat || missionariesRight - missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft + missionariesOnBoat, missionariesRight - missionariesOnBoat, cannibalsLeft + cannibalsOnBoat, cannibalsRight - cannibalsOnBoat, boatCapacity, position.LEFT, crossNumber + 1);
                             if (useHeuristic) child.heuristic();
@@ -119,7 +119,7 @@ public class State implements Comparable<State> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+//        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
         return missionariesLeft == state.missionariesLeft && missionariesRight == state.missionariesRight && cannibalsLeft == state.cannibalsLeft && cannibalsRight == state.cannibalsRight && boatPosition == state.boatPosition;
