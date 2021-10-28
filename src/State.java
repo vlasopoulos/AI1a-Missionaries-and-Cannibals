@@ -119,7 +119,7 @@ public class State implements Comparable<State> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+//        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
         return missionariesLeft == state.missionariesLeft && missionariesRight == state.missionariesRight && cannibalsLeft == state.cannibalsLeft && cannibalsRight == state.cannibalsRight && boatPosition == state.boatPosition;
