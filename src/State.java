@@ -66,7 +66,7 @@ public class State implements Comparable<State> {
                             child.setFather(this);
                             children.add(child);
                         }
-                    } else if (boatPosition == position.RIGHT && missionariesRight-missionariesOnBoat>-1 && cannibalsRight-cannibalsOnBoat>-1 ){ // boatPosition == position.RIGHT
+                    } else if (boatPosition == position.RIGHT && missionariesRight-missionariesOnBoat>-1 && cannibalsRight-cannibalsOnBoat>-1 ){
                         if ((missionariesLeft + missionariesOnBoat >= cannibalsLeft + cannibalsOnBoat || missionariesLeft + missionariesOnBoat == 0) && (missionariesRight - missionariesOnBoat >= cannibalsRight - cannibalsOnBoat || missionariesRight - missionariesOnBoat == 0)) {
                             State child = new State(missionariesLeft + missionariesOnBoat, missionariesRight - missionariesOnBoat, cannibalsLeft + cannibalsOnBoat, cannibalsRight - cannibalsOnBoat, boatCapacity, position.LEFT, crossNumber + 1);
                             if (useHeuristic) child.heuristic();
