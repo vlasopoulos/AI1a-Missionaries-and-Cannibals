@@ -15,10 +15,10 @@ RUN:
     `java Main <arguments>` (if already in src directory)  
   
 Arguments:  
-	    int population(number of cannibals/missionaries on left bank)  
-	    int boatCapacity (number of people the boat can carry)  
-	    int maxCrosses (maximum number of crosses the boat can attempt)  
-	    without arguments defaults: population = 3, boatCapacity = 2, maxCrosses = 11  
+	    - int population(number of cannibals/missionaries on left bank)  
+	    - int boatCapacity (number of people the boat can carry)  
+	    - int maxCrosses (maximum number of crosses the boat can attempt)  
+	    - without arguments defaults: population = 3, boatCapacity = 2, maxCrosses = 11  
   
 e.g.   
     `java -cp ./src Main 100 4 1000`  
